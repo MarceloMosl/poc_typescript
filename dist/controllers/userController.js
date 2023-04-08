@@ -38,13 +38,13 @@ import userRepo from "../repositories/userRepo.js";
 import { receiptSchema } from "../schemas/receiptSchema.js";
 export function getReceitas(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var rows;
+        var promise;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, userRepo.getReceitas()];
                 case 1:
-                    rows = (_a.sent()).rows;
-                    return [2 /*return*/, res.send(rows)];
+                    promise = _a.sent();
+                    return [2 /*return*/, res.send(promise.rows)];
             }
         });
     });
@@ -59,12 +59,46 @@ export function insertReceita(req, res) {
                     error = receiptSchema.validate(receipt).error;
                     if (error)
                         return [2 /*return*/, res.status(400).send({
-                                message: error.message
+                                message: error.message,
                             })];
                     return [4 /*yield*/, userRepo.insert(receipt)];
                 case 1:
                     _a.sent();
                     return [2 /*return*/, res.status(201).send("RECEITA INSERIDA COM SUCESSO MY FRIEND")];
+            }
+        });
+    });
+}
+export function deleteReceitas(req, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var id;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    id = req.params.id;
+                    console.log(id);
+                    return [4 /*yield*/, userRepo.deleteReceitas(Number(id))];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, res.sendStatus(200)];
+            }
+        });
+    });
+}
+export function updateReceitas(req, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var id, newPreparo;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    id = req.params.id;
+                    newPreparo = req.body.preparo;
+                    if (!newPreparo)
+                        return [2 /*return*/, res.sendStatus(400)];
+                    return [4 /*yield*/, userRepo.updateReceitas(Number(id), newPreparo)];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, res.sendStatus(200)];
             }
         });
     });

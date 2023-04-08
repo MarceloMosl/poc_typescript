@@ -55,7 +55,29 @@ function getReceitas() {
         });
     });
 }
+function deleteReceitas(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, db.query("\n        DELETE from receitas WHERE id = $1\n    ", [id])];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
+function updateReceitas(id, newPreparo) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, db.query("\n        UPDATE receitas SET preparo = $1 WHERE id = $2\n    ", [newPreparo, id])];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
 export default {
     insert: insert,
-    getReceitas: getReceitas
+    getReceitas: getReceitas,
+    deleteReceitas: deleteReceitas,
+    updateReceitas: updateReceitas,
 };
