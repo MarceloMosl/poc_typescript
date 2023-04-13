@@ -4,7 +4,7 @@ export type receitaResult = {
   id: number;
   titulo: string;
   preparo: string;
-  tempoDePreparo: string | number;
+  tempoDePreparo: string;
 };
 
 export type updateReceitaType = {

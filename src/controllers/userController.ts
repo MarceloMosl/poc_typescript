@@ -6,7 +6,7 @@ import { receiptSchema } from "../schemas/receiptSchema.js";
 export async function getReceitas(req: Request, res: Response) {
   const promise = await userRepo.getReceitas();
 
-  return res.send(promise.rows);
+  return res.send(promise);
 }
 
 export async function insertReceita(req: Request, res: Response) {
